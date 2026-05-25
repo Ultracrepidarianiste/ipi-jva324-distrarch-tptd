@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("api/commandes")
@@ -23,20 +22,18 @@ public class CommandeApi {
     }
 
     @PutMapping("{id}")
-    public Commande updateCommande(@RequestBody Commande commande) { // without @RequestBody, commande is not filled by auto databinding (though it would be in a web @Controller)
+    public Commande updateCommande(@RequestBody Commande commande) {
         return commandeService.updateCommande(commande);
     }
 
     @PostMapping("{id}/validate")
-    public Commande validateCommande(@RequestBody Commande commande) // without @RequestBody, commande is not filled by auto databinding (though it would be in a web @Controller)
+    public Commande validateCommande(@RequestBody Commande commande)
             throws StockInsuffisantCommandeException, CommandeInvalideException {
         return commandeService.validateCommande(commande);
     }
 
-    /** que pour tester à ce stade */
     @GetMapping
     public List<Commande> getCommandes() {
         return commandeService.getCommandes();
     }
-
 }
